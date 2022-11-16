@@ -35,13 +35,12 @@ bsize <- sqrt((data[10,1,]-data[1,1,])^2 + (data[10,2,]-data[10,2,])^2)
 c_over_b <- csize/bsize
 
 
-
+# Plot the distance vs the size measures and calculate correlation coefficients
 par(mfrow = c(2,2))
 plot(p_dist,csize,xlab="Distance to mean shape",ylab="Centroid size")
 plot(p_dist,bsize,xlab="Distance to mean shape",ylab="Baseline size")
 plot(p_dist,c_over_b,xlab="Distance to mean shape",ylab="Size ratio")
 plot(p_dist,abs(c_over_b-median(c_over_b)),xlab="Distance to mean shape",ylab="||Size ratio minus average||")
-
 cor(p_dist,csize)
 cor(p_dist,bsize)
 cor(p_dist,c_over_b)
@@ -49,7 +48,7 @@ cor(p_dist,c_over_b-median(c_over_b))
 cor(p_dist,abs(c_over_b-median(c_over_b)))
 
 
-
+# Generate and analyse a linear model
 lm <- lm(p_dist~abs(c_over_b-median(c_over_b)))
 qqnorm(lm$residuals)
 summary(lm)
